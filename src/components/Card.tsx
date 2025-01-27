@@ -1,7 +1,10 @@
-import React from 'react'
 
+interface CardProps{
+  home: any;
+  clickHandler: any;
+}
 
-export default function Card({home, clickHandler}) {
+export default function Card({home, clickHandler}: CardProps) {
   return (
     <div className=' bg-accent text-primary p-3 w-[300px] rounded-md hover:bg-primary hover:text-background m-4' onClick={()=>clickHandler(home)}>
         <div className='flex flex-col items-center'>

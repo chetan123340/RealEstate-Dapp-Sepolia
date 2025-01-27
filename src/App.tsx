@@ -65,8 +65,8 @@ function App() {
       <NavBar account={account} setAccount={setAccount}/>
       <Hero />
 
-      {/* {homes && <Listing homes={homes}/>} */}
-      <Listing/>
+      {homes && <Listing homes={homes}/>}
+      {/* <Listing/> */}
     </div>
   )
 }
