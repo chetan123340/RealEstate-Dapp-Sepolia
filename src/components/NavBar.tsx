@@ -1,7 +1,11 @@
 import { useState } from 'react'
 import { ethers } from "ethers";
 
-export default function NavBar({account, setAccount}) {
+interface NavBarProps {
+  account: any;
+  setAccount: any;
+}
+export default function NavBar({account, setAccount}: NavBarProps) {
 
   const connectWallet = async () => {
     if (typeof window.ethereum !== "undefined") {

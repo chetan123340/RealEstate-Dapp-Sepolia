@@ -26,6 +26,7 @@ function App() {
       const signer = await provider.getSigner()
 
       const realEstateContract = new ethers.Contract(realEstateAddress, realEstateABI, signer)
+
       const escrowContract = new ethers.Contract(escrowAddress, escrowABI, signer)
       setEscrow(escrowContract)
 
@@ -59,14 +60,14 @@ function App() {
     fetchBlockchainData(); // Call the async function
   }, []);
 
-
+  console.log("Account : "+account);
+  
   return (
     <div className='bg-background'>
       <NavBar account={account} setAccount={setAccount}/>
       <Hero />
 
-      {homes && <Listing homes={homes}/>}
-      {/* <Listing/> */}
+      {homes && <Listing homes={homes} account={account} provider={provider} escrow={escrow}/>}
     </div>
   )
 }
