@@ -5,6 +5,7 @@ import { ethers } from 'ethers'
 import Hero from './pages/Hero';
 import Listing from './pages/Listing';
 import NavBar from './components/NavBar';
+const { utils } = ethers as any;
 
 
 function App() {
@@ -52,19 +53,18 @@ function App() {
       setHomes(fetchedHomes); // Update state immutably
 
       window.ethereum.on('accountsChanged', async () => {
-        const accounts = await window.ethereum.request({ method: 'eth_requestAccounts' });
-        setAccount(accounts[0]);
+        const addy = await signer.getAddress()
+        setAccount(addy);
       });
     };
 
     fetchBlockchainData(); // Call the async function
   }, []);
 
-  console.log("Account : "+account);
   
   return (
     <div className='bg-background'>
-      <NavBar account={account} setAccount={setAccount}/>
+      <NavBar account={account} provider={provider} setAccount={setAccount}/>
       <Hero />
 
       {homes && <Listing homes={homes} account={account} provider={provider} escrow={escrow}/>}

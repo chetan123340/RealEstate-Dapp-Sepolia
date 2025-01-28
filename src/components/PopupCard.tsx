@@ -48,11 +48,15 @@ export default function PopupCard({ account, provider, escrow, toggleHome, setIs
         fetchDetails();
         fetchOwner();
 
-
-
     }, []);
-    
-    const {inspector, lender, buyer, seller, hasBought, hasInspected, hasLended, hasSold} = details
+
+    const { inspector, lender, buyer, seller, hasBought, hasInspected, hasLended, hasSold } = details
+    console.log("inspector : " + inspector);
+    console.log("lender : " + lender);
+    console.log("buyer : " + buyer);
+    console.log("seller : " + seller);
+    console.log("account : " + account);
+
     const buyHandler = () => (null)
     const sellHandler = () => (null)
     const inspectHandler = () => (null)
@@ -84,47 +88,32 @@ export default function PopupCard({ account, provider, escrow, toggleHome, setIs
                 ) : (
                     <div className="space-y-4 mt-4">
                         {account === inspector ? (
-                            <button
-                                className="w-full bg-blue-600 text-white py-2 rounded-lg hover:bg-blue-700"
-                                onClick={inspectHandler}
-                                disabled={hasInspected}
-                            >
-                                Approve Inspection
-                            </button>
+                            <div className='mt-4 text-background text-3xl'>
+                                <button className='bg-green-500 w-full rounded-2xl p-2 font-bold' onClick={sellHandler}
+                                    disabled={hasSold}>Approve Inspection</button>
+                            </div>
                         ) : account === lender ? (
-                            <button
-                                className="w-full bg-green-600 text-white py-2 rounded-lg hover:bg-green-700"
-                                onClick={lendHandler}
-                                disabled={hasLended}
-                            >
-                                Approve & Lend
-                            </button>
+                            <div className='mt-4 text-background text-3xl'>
+                                <button className='bg-blue-500 w-full rounded-2xl p-2 font-bold' onClick={sellHandler}
+                                    disabled={hasSold}>Approve & Lend</button>
+                            </div>
                         ) : account === seller ? (
-                            <button
-                                className="w-full bg-red-600 text-white py-2 rounded-lg hover:bg-red-700"
-                                onClick={sellHandler}
-                                disabled={hasSold}
-                            >
-                                Approve & Sell
-                            </button>
+                            <div className='mt-4 text-background text-3xl'>
+                                <button className='bg-red-500 w-full rounded-2xl p-2 font-bold' onClick={sellHandler}
+                                    disabled={hasSold}>Approve & Sell</button>
+                            </div>
                         ) : (
-                            <button
-                                className="w-full bg-indigo-600 text-white py-2 rounded-lg hover:bg-indigo-700"
-                                onClick={buyHandler}
-                                disabled={hasBought}
-                            >
-                                Buy
-                            </button>
+
+                            <div className='mt-4 text-background text-3xl'>
+                                <button className='bg-secondary w-full rounded-2xl p-2 font-bold' onClick={buyHandler}
+                                    disabled={hasBought}>Buy @ {toggleHome.attributes[0].value} ETH</button>
+                            </div>
                         )}
 
-                        <button className="w-full bg-gray-300 text-gray-800 py-2 rounded-lg hover:bg-gray-400">
-                            Contact agent
-                        </button>
                     </div>
                 )}
-                <div className='mt-4 text-background text-3xl'>
-                    <button className='bg-secondary w-full rounded-2xl p-2 font-bold'>Buy @ {toggleHome.attributes[0].value} ETH</button>
-                </div>
+
+
             </div>
         </div>
     )
