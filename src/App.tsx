@@ -5,8 +5,6 @@ import { ethers } from 'ethers'
 import Hero from './pages/Hero';
 import Listing from './pages/Listing';
 import NavBar from './components/NavBar';
-const { utils } = ethers as any;
-
 
 function App() {
   const [provider, setProvider] = useState<any>(null)
