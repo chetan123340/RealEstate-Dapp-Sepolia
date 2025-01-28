@@ -5,6 +5,9 @@ import { ethers } from 'ethers'
 import Hero from './pages/Hero';
 import Listing from './pages/Listing';
 import NavBar from './components/NavBar';
+import AddProperty from './pages/AddProperty';
+import Approval from './pages/Approval';
+import { BrowserRouter, Route, Routes } from 'react-router-dom';
 
 function App() {
   const [provider, setProvider] = useState<any>(null)
@@ -12,16 +15,16 @@ function App() {
   const [escrow, setEscrow] = useState<any>(null)
   const [homes, setHomes] = useState<any[]>([]); // Ensure `homes` can hold metadata objects
 
-  
+
   const realEstateAddress = '0x22Bb2A4b68FEfCdF0A5A555514A70a0d996cC83a'
-  const escrowAddress = '0x8D2424CDE9f39C70EFF88e20D085e1E366DcFDa1' 
-  
-  
+  const escrowAddress = '0x8D2424CDE9f39C70EFF88e20D085e1E366DcFDa1'
+
+
   useEffect(() => {
     const fetchBlockchainData = async () => {
       const provider = new ethers.BrowserProvider(window.ethereum);
       setProvider(provider)
-      
+
       const signer = await provider.getSigner()
 
       const realEstateContract = new ethers.Contract(realEstateAddress, realEstateABI, signer)
@@ -38,12 +41,12 @@ function App() {
           // Fetch metadata from the Token URI
           const response = await fetch(tokenURI);
           const metadata = await response.json();
-          
+
           if (metadata) {
             fetchedHomes.push(metadata)
-            
+
           }
-          
+
         } catch (error: any) {
           console.error("Error fetching NFT details:", error.message || error);
         }
@@ -59,14 +62,24 @@ function App() {
     fetchBlockchainData(); // Call the async function
   }, []);
 
-  
+  const Home = () => (
+    <div>
+      <Hero />
+      {homes && <Listing homes={homes} account={account} provider={provider} escrow={escrow} />}
+    </div>
+  )
+
   return (
+    <BrowserRouter>
     <div className='bg-background'>
       <NavBar account={account} provider={provider} setAccount={setAccount}/>
-      <Hero />
-
-      {homes && <Listing homes={homes} account={account} provider={provider} escrow={escrow}/>}
-    </div>
+      <Routes>
+        <Route path='/' element={<Home />} />
+        <Route path='/add-property' element={<AddProperty />} />
+        <Route path='/approval' element={<Approval />} />
+      </Routes>
+      </div>
+    </BrowserRouter>
   )
 }
 

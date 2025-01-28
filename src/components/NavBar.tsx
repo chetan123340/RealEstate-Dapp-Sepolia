@@ -33,11 +33,14 @@ export default function NavBar({ provider, account, setAccount }: NavBarProps) {
   const handleApproval = () => {
     navigate("/approval")
   }
+  const handleHome = () => {
+    navigate("/")
+  }
 
   return (
     <nav className="fixed top-0 w-full bg-accent shadow-lg z-50 p-2">
       <div className="flex justify-between">
-        <div className='font-bold text-xl mt-2'>Real Estate Dapp</div>
+        <div className='font-bold text-xl mt-2' onClick={handleHome}>Real Estate Dapp</div>
         <div className="flex justify-end">
           {account == SELLER_ADDRESS ? <div className='ml-3'><button className='bg-secondary p-2 font-bold text-background rounded-full' onClick={handleApproval}>Seller Btn</button></div> : null}
           <div className='ml-3'><button className='bg-secondary p-2 font-bold text-background rounded-full' onClick={handleAddProperty}>Add Property</button></div>
