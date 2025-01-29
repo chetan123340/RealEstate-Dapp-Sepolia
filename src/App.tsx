@@ -37,7 +37,7 @@ function App() {
       setTotalSupply(Number(s))
       
       const fetchedHomes: any[] = []; // Temporary array to collect metadata
-      for (let index = 1; index <= totalSupply; index++) {
+      for (let index = 1; index <= Number(s); index++) {
         try {
           // Fetch the token URI
           const tokenURI = await realEstateContract.tokenURI(index);
@@ -72,15 +72,15 @@ function App() {
       {homes && <Listing homes={homes} account={account} provider={provider} escrow={escrow} />}
     </div>
   )
-
+  
   return (
     <BrowserRouter>
     <div className='bg-background'>
       <NavBar account={account} provider={provider} setAccount={setAccount}/>
       <Routes>
         <Route path='/' element={<Home />} />
-        <Route path='/add-property' element={<AddProperty />} />
-        <Route path='/approval' element={<Approval />} />
+        <Route path='/add-property' element={<AddProperty totalSupply={totalSupply}/>} />
+        <Route path='/approval' element={<Approval account={account} />} />
       </Routes>
       </div>
     </BrowserRouter>

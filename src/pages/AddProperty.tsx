@@ -1,14 +1,16 @@
 import { useState } from "react"
 import InputLabel from "../components/InputLabel"
 import { PinataSDK } from "pinata-web3";
+import axios from "axios";
 
-export default function AddProperty({totalSupply} : {totalSupply: number}) {
+export default function AddProperty({ totalSupply }: { totalSupply: number }) {
     const pinata = new PinataSDK({
-        pinataJwt: import.meta.env.JWT,
-        pinataGateway: import.meta.env.pinataGateway,
-      });
+        pinataJwt: import.meta.env.VITE_JWT,
+        pinataGateway: import.meta.env.VITE_pinataGateway,
+    });
 
     const initialState = {
+        owner: "",
         name: "",
         address: "",
         description: "",
@@ -22,13 +24,13 @@ export default function AddProperty({totalSupply} : {totalSupply: number}) {
     }
     const [homeDetails, setHomeDetails] = useState(initialState)
 
-    const handleSubmit = () => {
+    const handleSubmit = async () => {
         const metadata = {
             name: homeDetails.name,
             address: homeDetails.address,
             description: homeDetails.description,
             image: homeDetails.image,
-            id: totalSupply+1,
+            id: totalSupply + 1,
             attributes: [
                 {
                     trait_type: "Purchase Price",
@@ -56,24 +58,45 @@ export default function AddProperty({totalSupply} : {totalSupply: number}) {
                 }
             ]
         }
-        const metadataJson = JSON.stringify(metadata, null, 2)
-        // try {
-        //     const file = new File([metadataJson, ""], { type: "text/plain" });
-        //     const upload = await pinata.upload.file(file);
-        //     console.log(upload);
-        //   } catch (error) {
-        //     console.log(error);
-        //   }
+
+        try {
+            const upload = await pinata.upload.json(metadata);
+            setHomeDetails(initialState)
+            const dbData = {
+                IpfsHash: upload.IpfsHash,
+                owner: homeDetails.owner,
+                isListed: false
+            }
+            try {
+                await axios.post("http://localhost:3000/data", dbData)
+                alert("Success!!")
+            } catch (error) {
+                console.log("Error in json server");
+
+            }
+
+        } catch (error) {
+            console.log(error);
+        }
     }
 
     return (
         <div className="flex justify-center items-center ">
             <div className="m-24 p-4 rounded-2xl shadow-2xl w-[900px]">
                 <div className="flex flex-col">
-                    <InputLabel label="Name" placeholder="Enter your name" type="text" homeDetails={homeDetails} setHomeDetails={setHomeDetails} name="name" />
+                    <div className=" flex justify-between">
+                        <div className="w-[50%] m-2">
+
+                            <InputLabel label="Name" placeholder="Enter your name" type="text" homeDetails={homeDetails} setHomeDetails={setHomeDetails} name="name" />
+                        </div>
+                        <div className="w-[50%] m-2">
+                            <InputLabel label="Owner" placeholder="Enter the owner hash address" type="text" homeDetails={homeDetails} setHomeDetails={setHomeDetails} name="owner" />
+
+                        </div>
+                    </div>
                     <InputLabel label="Address" placeholder="Enter the address" type="text" homeDetails={homeDetails} setHomeDetails={setHomeDetails} name="address" />
                     <InputLabel label="Description" placeholder="Enter the description" type="text" homeDetails={homeDetails} setHomeDetails={setHomeDetails} name="description" />
-                    {/* <InputLabel label="Image" placeholder="Add the Image of your property" type="file" homeDetails={homeDetails} setHomeDetails={setHomeDetails} name="image"/> */}
+                    <InputLabel label="Image" placeholder="Add the link to the Image of your property" type="text" homeDetails={homeDetails} setHomeDetails={setHomeDetails} name="image"/>
                     <div className="flex justify-stretch">
                         <div className="w-[50%] m-2">
                             <InputLabel label="Purchase Price" placeholder="Enter the purchase price" type="number" homeDetails={homeDetails} setHomeDetails={setHomeDetails} name="price" />

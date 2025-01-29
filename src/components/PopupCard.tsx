@@ -51,11 +51,6 @@ export default function PopupCard({ account, provider, escrow, toggleHome, setIs
     }, []);
 
     const { inspector, lender, buyer, seller, hasBought, hasInspected, hasLended, hasSold } = details
-    console.log("inspector : " + inspector);
-    console.log("lender : " + lender);
-    console.log("buyer : " + buyer);
-    console.log("seller : " + seller);
-    console.log("account : " + account);
 
     const buyHandler = () => (null)
     const sellHandler = () => (null)
