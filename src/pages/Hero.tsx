@@ -18,7 +18,7 @@ export default function Hero() {
       <p className="text-xl text-gray-600 mb-6">
       Revolutionize real estate with blockchain! Secure, transparent transactions powered by NFTs and Ethereum, simplifying ownership and reducing fraud.
       </p>
-      <button onClick={handleScroll} className="px-6 py-3 text-accent rounded-lg hover:bg-primary bg-secondary">
+      <button onClick={handleScroll} className="px-6 py-3 text-white rounded-lg hover:bg-primary bg-secondary font-bold">
         Explore Properties!
       </button>
     </div>

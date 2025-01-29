@@ -14,6 +14,7 @@ function App() {
   const [account, setAccount] = useState<any>(null)
   const [escrow, setEscrow] = useState<any>(null)
   const [homes, setHomes] = useState<any[]>([]); // Ensure `homes` can hold metadata objects
+  const [totalSupply, setTotalSupply] = useState<number>(0)
 
 
   const realEstateAddress = '0x22Bb2A4b68FEfCdF0A5A555514A70a0d996cC83a'
@@ -32,8 +33,11 @@ function App() {
       const escrowContract = new ethers.Contract(escrowAddress, escrowABI, signer)
       setEscrow(escrowContract)
 
+      const s = await realEstateContract.totalSupply()
+      setTotalSupply(Number(s))
+      
       const fetchedHomes: any[] = []; // Temporary array to collect metadata
-      for (let index = 1; index <= 3; index++) {
+      for (let index = 1; index <= totalSupply; index++) {
         try {
           // Fetch the token URI
           const tokenURI = await realEstateContract.tokenURI(index);
