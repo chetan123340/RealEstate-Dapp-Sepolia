@@ -85,11 +85,10 @@ export default function AddProperty({ totalSupply }: { totalSupply: number }) {
             <div className="m-24 p-4 rounded-2xl shadow-2xl w-[900px]">
                 <div className="flex flex-col">
                     <div className=" flex justify-between">
-                        <div className="w-[50%] m-2">
-
+                        <div className="w-[50%] mr-2">
                             <InputLabel label="Name" placeholder="Enter your name" type="text" homeDetails={homeDetails} setHomeDetails={setHomeDetails} name="name" />
                         </div>
-                        <div className="w-[50%] m-2">
+                        <div className="w-[50%] ml-2">
                             <InputLabel label="Owner" placeholder="Enter the owner hash address" type="text" homeDetails={homeDetails} setHomeDetails={setHomeDetails} name="owner" />
 
                         </div>
@@ -98,20 +97,20 @@ export default function AddProperty({ totalSupply }: { totalSupply: number }) {
                     <InputLabel label="Description" placeholder="Enter the description" type="text" homeDetails={homeDetails} setHomeDetails={setHomeDetails} name="description" />
                     <InputLabel label="Image" placeholder="Add the link to the Image of your property" type="text" homeDetails={homeDetails} setHomeDetails={setHomeDetails} name="image"/>
                     <div className="flex justify-stretch">
-                        <div className="w-[50%] m-2">
+                        <div className="w-[50%] mr-2">
                             <InputLabel label="Purchase Price" placeholder="Enter the purchase price" type="number" homeDetails={homeDetails} setHomeDetails={setHomeDetails} name="price" />
                             <InputLabel label="Type of Residence" placeholder="Enter the type of residence" type="text" homeDetails={homeDetails} setHomeDetails={setHomeDetails} name="type" />
                             <InputLabel label="Bed Rooms" placeholder="Enter the number of Bed Rooms" type="number" homeDetails={homeDetails} setHomeDetails={setHomeDetails} name="bedrooms" />
                         </div>
-                        <div className="w-[50%] m-2">
+                        <div className="w-[50%] ml-2">
                             <InputLabel label="Bathrooms" placeholder="Enter the number of Bathrooms" type="number" homeDetails={homeDetails} setHomeDetails={setHomeDetails} name="bathrooms" />
                             <InputLabel label="Square Feet" placeholder="Enter the Square Feet" type="number" homeDetails={homeDetails} setHomeDetails={setHomeDetails} name="sqft" />
                             <InputLabel label="Year Built" placeholder="Enter the Year Built" type="number" homeDetails={homeDetails} setHomeDetails={setHomeDetails} name="year" />
                         </div>
                     </div>
                 </div>
-                <div className="flex justify-end">
-                    <button className="p-3 bg-accent border rounded-2xl font-bold text-primary w-[25%]" onClick={handleSubmit}>Submit</button>
+                <div className="group flex justify-end">
+                    <button className="group-hover:cursor-pointer p-3 bg-accent border rounded-2xl font-bold text-primary w-[25%]" onClick={handleSubmit}>Submit</button>
                 </div>
             </div>
         </div>

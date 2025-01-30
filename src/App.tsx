@@ -12,7 +12,8 @@ import { BrowserRouter, Route, Routes } from 'react-router-dom';
 function App() {
   const [provider, setProvider] = useState<any>(null)
   const [account, setAccount] = useState<any>(null)
-  const [escrow, setEscrow] = useState<any>(null)
+  const [escrowContract, setEscrowContract] = useState<any>(null)
+  const [realEstateContract, setRealEstateContract] = useState<any>(null)
   const [homes, setHomes] = useState<any[]>([]); // Ensure `homes` can hold metadata objects
   const [totalSupply, setTotalSupply] = useState<number>(0)
 
@@ -29,9 +30,10 @@ function App() {
       const signer = await provider.getSigner()
 
       const realEstateContract = new ethers.Contract(realEstateAddress, realEstateABI, signer)
+      setRealEstateContract(realEstateContract)
 
       const escrowContract = new ethers.Contract(escrowAddress, escrowABI, signer)
-      setEscrow(escrowContract)
+      setEscrowContract(escrowContract)
 
       const s = await realEstateContract.totalSupply()
       setTotalSupply(Number(s))
@@ -69,7 +71,7 @@ function App() {
   const Home = () => (
     <div>
       <Hero />
-      {homes && <Listing homes={homes} account={account} provider={provider} escrow={escrow} />}
+      {homes && <Listing homes={homes} account={account} provider={provider} escrow={escrowContract} />}
     </div>
   )
   
@@ -80,7 +82,15 @@ function App() {
       <Routes>
         <Route path='/' element={<Home />} />
         <Route path='/add-property' element={<AddProperty totalSupply={totalSupply}/>} />
-        <Route path='/approval' element={<Approval account={account} />} />
+        <Route path='/approval' element={
+          <Approval 
+          account={account} 
+          realEstateContract={realEstateContract} 
+          escrowContract={escrowContract} 
+          escrowAddress={escrowAddress} 
+          realEstateAddress={realEstateAddress} 
+          provider={provider}/>
+          } />
       </Routes>
       </div>
     </BrowserRouter>
