@@ -21,6 +21,7 @@ export default function PopupCard({ account, provider, escrow, toggleHome, setIs
 
     const [owner, setOwner] = useState<string>("");
     const [loading, setLoading] = useState<boolean>(false);
+    const { inspector, lender, buyer, seller, hasBought, hasInspected, hasLended, hasSold } = details
 
     const fetchDetails = async () => {
         setLoading(true)
@@ -51,14 +52,53 @@ export default function PopupCard({ account, provider, escrow, toggleHome, setIs
         fetchDetails();
         fetchOwner();
 
-    }, [account]);
+    }, [account, hasSold]);
 
-    const { inspector, lender, buyer, seller, hasBought, hasInspected, hasLended, hasSold } = details
+    const buyHandler = async () => {
+        const escrowAmount = await escrow.escrowAmount(toggleHome.id);
+        const signer = await provider.getSigner();
 
-    const buyHandler = () => (null)
-    const sellHandler = () => (null)
-    const inspectHandler = () => (null)
-    const lendHandler = () => (null)
+        let transaction = await escrow.connect(signer).depositEarnest(toggleHome.id, { value: escrowAmount });
+        await transaction.wait();
+
+        transaction = await escrow.connect(signer).approveSale(toggleHome.id);
+        await transaction.wait();
+
+        setDetails(prev => ({ ...prev, hasBought: true }));
+    }
+
+    const sellHandler = async () => {
+        const signer = await provider.getSigner();
+
+        let transaction = await escrow.connect(signer).approveSale(toggleHome.id);
+        await transaction.wait();
+
+        transaction = await escrow.connect(signer).finalizeSale(toggleHome.id);
+        await transaction.wait();
+
+        setDetails(prev => ({ ...prev, hasSold: true }));
+    }
+
+    const inspectHandler = async () => {
+        const signer = await provider.getSigner();
+
+        const transaction = await escrow.connect(signer).updateInspectionStatus(toggleHome.id, true);
+        await transaction.wait();
+
+        setDetails(prev => ({ ...prev, hasInspected: true }));
+    }
+
+    const lendHandler = async () => {
+        const signer = await provider.getSigner();
+
+        const transaction = await escrow.connect(signer).approveSale(toggleHome.id);
+        await transaction.wait();
+
+        const lendAmount = (await escrow.purchasePrice(toggleHome.id) - await escrow.escrowAmount(toggleHome.id));
+        await signer.sendTransaction({ to: escrow.address, value: lendAmount.toString(), gasLimit: 60000 });
+
+        setDetails(prev => ({ ...prev, hasLended: true }));
+    }
 
 
     return (
@@ -80,43 +120,49 @@ export default function PopupCard({ account, provider, escrow, toggleHome, setIs
                     </div>
                 </div>
                 {owner ? (
-                    <div className="text-lg text-gray-700 mt-4 text-center font-bold bg-green-400 rounded-md p-2">
+                    <div className="text-3xl text-gray-700 mt-4 text-center font-bold bg-green-400 rounded-md p-2">
                         Owned by {owner.slice(0, 6) + '...' + owner.slice(38, 42)}
                     </div>
                 ) : (
                     <div className="space-y-4 mt-4">
                         {loading ? (
-                            <div className="text-center text-lg">Loading...</div>
+                            <div className="text-center text-3xl border bg-gray-300 text-white font-semibold mt-4 p-2 rounded-2xl">
+                                Loading...
+                            </div>
                         ) : account === inspector ? (
                             <div className='mt-4 text-background text-3xl'>
-                                <button className='bg-green-500 w-full rounded-2xl p-2 font-bold group-hover:cursor-pointer'
+                                <button className={`w-full rounded-2xl p-2 font-bold 
+                                                    ${hasInspected ? 'bg-gray-400 cursor-not-allowed' : 'bg-green-500 group-hover:cursor-pointer'}`}
                                     onClick={inspectHandler}
                                     disabled={hasInspected}>
-                                    Approve Inspection
+                                    {hasInspected ? 'Inspection Approved' : 'Approve Inspection'}
                                 </button>
                             </div>
                         ) : account === lender ? (
                             <div className='mt-4 text-background text-3xl'>
-                                <button className='bg-blue-500 w-full rounded-2xl p-2 font-bold group-hover:cursor-pointer'
+                                <button className={`font-bold w-full rounded-2xl p-2
+                                ${hasLended ? 'bg-gray-400 cursor-not-allowed' : "bg-blue-500 group-hover:cursor-pointer"}`}
                                     onClick={lendHandler}
                                     disabled={hasLended}>
-                                    Approve & Lend
+                                    {hasLended ? 'Lending Approved' : 'Approve & Lend'}
                                 </button>
                             </div>
                         ) : account === seller ? (
                             <div className='mt-4 text-background text-3xl'>
-                                <button className='bg-red-500 w-full rounded-2xl p-2 font-bold group-hover:cursor-pointer'
+                                <button className={`w-full rounded-2xl p-2 font-bold 
+                                ${hasSold ? 'bg-gray-400 cursor-not-allowed' : "bg-red-500 group-hover:cursor-pointer"}`}
                                     onClick={sellHandler}
                                     disabled={hasSold}>
-                                    Approve & Sell
+                                        {hasSold ? 'Selling Approved' : 'Approve & Sell'}
                                 </button>
                             </div>
                         ) : (
                             <div className='mt-4 text-background text-3xl'>
-                                <button className='bg-secondary w-full rounded-2xl p-2 font-bold group-hover:cursor-pointer'
+                                <button className={`w-full rounded-2xl p-2 font-bold
+                                ${hasBought ? 'bg-gray-400 cursor-not-allowed' : "bg-secondary  group-hover:cursor-pointer"} `}
                                     onClick={buyHandler}
                                     disabled={hasBought}>
-                                    Buy @ {toggleHome.attributes[0].value} ETH
+                                        {hasBought ? 'Buying Approved' : `Buy @ ${toggleHome.attributes[0].value} ETH`}
                                 </button>
                             </div>
                         )}

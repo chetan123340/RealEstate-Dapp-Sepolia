@@ -1,6 +1,6 @@
 [
     {
-        "name": "Spacious Farmhouse Retreat",
+        "name": "Spacious Farmhouse",
         "address": "Nandi Hills, Bengaluru, Karnataka 562110",
         "description": "A tranquil farmhouse retreat with lush green surroundings.",
         "image": "",
@@ -33,7 +33,7 @@
         ]
     },
     {
-        "name": "Luxury Condo in South Mumbai",
+        "name": "Luxury Condo",
         "address": "Marine Drive, Mumbai, Maharashtra 400020",
         "description": "A high-end condo with premium amenities in South Mumbai.",
         "image": "",
