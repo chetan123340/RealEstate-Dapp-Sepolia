@@ -88,7 +88,6 @@ function App() {
           realEstateContract={realEstateContract} 
           escrowContract={escrowContract} 
           escrowAddress={escrowAddress} 
-          realEstateAddress={realEstateAddress} 
           provider={provider}/>
           } />
       </Routes>

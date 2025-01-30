@@ -20,8 +20,10 @@ export default function PopupCard({ account, provider, escrow, toggleHome, setIs
     })
 
     const [owner, setOwner] = useState<string>("");
+    const [loading, setLoading] = useState<boolean>(false);
 
     const fetchDetails = async () => {
+        setLoading(true)
         const buyer = await escrow.buyer(toggleHome.id);
         const hasBought = await escrow.approval(toggleHome.id, buyer);
 
@@ -35,6 +37,7 @@ export default function PopupCard({ account, provider, escrow, toggleHome, setIs
         const hasInspected = await escrow.inspectionPassed(toggleHome.id);
 
         setDetails({ buyer, seller, lender, inspector, hasBought, hasSold, hasLended, hasInspected });
+        setLoading(false)
     };
 
     const fetchOwner = async () => {
@@ -48,7 +51,7 @@ export default function PopupCard({ account, provider, escrow, toggleHome, setIs
         fetchDetails();
         fetchOwner();
 
-    }, []);
+    }, [account]);
 
     const { inspector, lender, buyer, seller, hasBought, hasInspected, hasLended, hasSold } = details
 
@@ -59,7 +62,7 @@ export default function PopupCard({ account, provider, escrow, toggleHome, setIs
 
 
     return (
-        <div className="fixed inset-0 z-50 flex items-center justify-center bg-opacity-50 text-primary">
+        <div className="group fixed inset-0 z-50 flex items-center justify-center bg-opacity-50 text-primary">
             <div className="bg-white p-6 rounded-lg shadow-lg w-[900px] h-[600px]">
                 <div className='flex justify-end m-[-15px] text-xl cursor-pointer' onClick={() => setIsOpen(false)}>X</div>
                 <h2 className="text-5xl font-bold mb-4">{toggleHome.name}</h2>
@@ -82,33 +85,43 @@ export default function PopupCard({ account, provider, escrow, toggleHome, setIs
                     </div>
                 ) : (
                     <div className="space-y-4 mt-4">
-                        {account === inspector ? (
+                        {loading ? (
+                            <div className="text-center text-lg">Loading...</div>
+                        ) : account === inspector ? (
                             <div className='mt-4 text-background text-3xl'>
-                                <button className='bg-green-500 w-full rounded-2xl p-2 font-bold' onClick={sellHandler}
-                                    disabled={hasSold}>Approve Inspection</button>
+                                <button className='bg-green-500 w-full rounded-2xl p-2 font-bold group-hover:cursor-pointer'
+                                    onClick={inspectHandler}
+                                    disabled={hasInspected}>
+                                    Approve Inspection
+                                </button>
                             </div>
                         ) : account === lender ? (
                             <div className='mt-4 text-background text-3xl'>
-                                <button className='bg-blue-500 w-full rounded-2xl p-2 font-bold' onClick={sellHandler}
-                                    disabled={hasSold}>Approve & Lend</button>
+                                <button className='bg-blue-500 w-full rounded-2xl p-2 font-bold group-hover:cursor-pointer'
+                                    onClick={lendHandler}
+                                    disabled={hasLended}>
+                                    Approve & Lend
+                                </button>
                             </div>
                         ) : account === seller ? (
                             <div className='mt-4 text-background text-3xl'>
-                                <button className='bg-red-500 w-full rounded-2xl p-2 font-bold' onClick={sellHandler}
-                                    disabled={hasSold}>Approve & Sell</button>
+                                <button className='bg-red-500 w-full rounded-2xl p-2 font-bold group-hover:cursor-pointer'
+                                    onClick={sellHandler}
+                                    disabled={hasSold}>
+                                    Approve & Sell
+                                </button>
                             </div>
                         ) : (
-
                             <div className='mt-4 text-background text-3xl'>
-                                <button className='bg-secondary w-full rounded-2xl p-2 font-bold' onClick={buyHandler}
-                                    disabled={hasBought}>Buy @ {toggleHome.attributes[0].value} ETH</button>
+                                <button className='bg-secondary w-full rounded-2xl p-2 font-bold group-hover:cursor-pointer'
+                                    onClick={buyHandler}
+                                    disabled={hasBought}>
+                                    Buy @ {toggleHome.attributes[0].value} ETH
+                                </button>
                             </div>
                         )}
-
                     </div>
                 )}
-
-
             </div>
         </div>
     )

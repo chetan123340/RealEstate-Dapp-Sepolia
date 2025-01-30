@@ -8,7 +8,6 @@ interface ApprovalProps {
   realEstateContract: any;
   escrowContract: any;
   escrowAddress: string;
-  realEstateAddress: string;
   provider: any;
 }
 export default function Approval({
@@ -16,7 +15,6 @@ export default function Approval({
   realEstateContract,
   escrowContract,
   escrowAddress,
-  realEstateAddress,
   provider }: ApprovalProps) {
   if (account === "0xEe9a477BDb9791FFd0D135d3e6E31d968f90dC4F") {
     const [steps, setSteps] = useState<string[]>([]);
