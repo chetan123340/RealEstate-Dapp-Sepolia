@@ -1,0 +1,167 @@
+[
+    {
+        "name": "Luxury Condo",
+        "address": "Marine Drive, Mumbai, Maharashtra 400020",
+        "description": "A high-end condo with premium amenities in South Mumbai.",
+        "image": "",
+        "id": "6",
+        "attributes": [
+            {
+                "trait_type": "Purchase Price",
+                "value": 0.02
+            },
+            {
+                "trait_type": "Type of Residence",
+                "value": "Condo"
+            },
+            {
+                "trait_type": "Bed Rooms",
+                "value": 3
+            },
+            {
+                "trait_type": "Bathrooms",
+                "value": 3
+            },
+            {
+                "trait_type": "Square Feet",
+                "value": 2200
+            },
+            {
+                "trait_type": "Year Built",
+                "value": 2018
+            }
+        ]
+    },
+    {
+        "name": "Cozy Studio Apartment",
+        "address": "Koregaon Park, Pune, Maharashtra 411001",
+        "description": "A cozy and modern studio apartment in the vibrant Koregaon Park.",
+        "image": "",
+        "id": "7",
+        "attributes": [
+            {
+                "trait_type": "Purchase Price",
+                "value": 0.02
+            },
+            {
+                "trait_type": "Type of Residence",
+                "value": "Studio Apartment"
+            },
+            {
+                "trait_type": "Bed Rooms",
+                "value": 1
+            },
+            {
+                "trait_type": "Bathrooms",
+                "value": 1
+            },
+            {
+                "trait_type": "Square Feet",
+                "value": 600
+            },
+            {
+                "trait_type": "Year Built",
+                "value": 2022
+            }
+        ]
+    },
+    {
+        "name": "Traditional Bungalow",
+        "address": "Alleppey, Kerala 688001",
+        "description": "A charming traditional bungalow in the backwaters of Kerala.",
+        "image": "",
+        "id": "8",
+        "attributes": [
+            {
+                "trait_type": "Purchase Price",
+                "value": 0.02
+            },
+            {
+                "trait_type": "Type of Residence",
+                "value": "Bungalow"
+            },
+            {
+                "trait_type": "Bed Rooms",
+                "value": 4
+            },
+            {
+                "trait_type": "Bathrooms",
+                "value": 3
+            },
+            {
+                "trait_type": "Square Feet",
+                "value": 2800
+            },
+            {
+                "trait_type": "Year Built",
+                "value": 2015
+            }
+        ]
+    },
+    {
+        "name": "Heritage Mansion",
+        "address": "Fort Kochi, Kerala 682001",
+        "description": "A beautifully restored heritage mansion with antique interiors.",
+        "image": "",
+        "id": "9",
+        "attributes": [
+            {
+                "trait_type": "Purchase Price",
+                "value": 0.02
+            },
+            {
+                "trait_type": "Type of Residence",
+                "value": "Mansion"
+            },
+            {
+                "trait_type": "Bed Rooms",
+                "value": 6
+            },
+            {
+                "trait_type": "Bathrooms",
+                "value": 6
+            },
+            {
+                "trait_type": "Square Feet",
+                "value": 6000
+            },
+            {
+                "trait_type": "Year Built",
+                "value": 1920
+            }
+        ]
+    },
+    {
+        "name": "Hilltop Cottage",
+        "address": "Ooty, Tamil Nadu 643001",
+        "description": "A peaceful hilltop cottage surrounded by tea plantations.",
+        "image": "",
+        "id": "10",
+        "attributes": [
+            {
+                "trait_type": "Purchase Price",
+                "value": 0.02
+            },
+            {
+                "trait_type": "Type of Residence",
+                "value": "Cottage"
+            },
+            {
+                "trait_type": "Bed Rooms",
+                "value": 3
+            },
+            {
+                "trait_type": "Bathrooms",
+                "value": 2
+            },
+            {
+                "trait_type": "Square Feet",
+                "value": 1500
+            },
+            {
+                "trait_type": "Year Built",
+                "value": 2013
+            }
+        ]
+    }
+]
