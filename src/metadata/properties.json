@@ -1,38 +1,5 @@
 [
     {
-        "name": "Luxury Condo",
-        "address": "Marine Drive, Mumbai, Maharashtra 400020",
-        "description": "A high-end condo with premium amenities in South Mumbai.",
-        "image": "",
-        "id": "6",
-        "attributes": [
-            {
-                "trait_type": "Purchase Price",
-                "value": 0.02
-            },
-            {
-                "trait_type": "Type of Residence",
-                "value": "Condo"
-            },
-            {
-                "trait_type": "Bed Rooms",
-                "value": 3
-            },
-            {
-                "trait_type": "Bathrooms",
-                "value": 3
-            },
-            {
-                "trait_type": "Square Feet",
-                "value": 2200
-            },
-            {
-                "trait_type": "Year Built",
-                "value": 2018
-            }
-        ]
-    },
-    {
         "name": "Cozy Studio Apartment",
         "address": "Koregaon Park, Pune, Maharashtra 411001",
         "description": "A cozy and modern studio apartment in the vibrant Koregaon Park.",

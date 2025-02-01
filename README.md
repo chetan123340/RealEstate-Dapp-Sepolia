@@ -1,50 +1,81 @@
-# React + TypeScript + Vite
+# Real Estate DApp
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+## Overview
+This decentralized application (DApp) enables seamless real estate transactions using smart contracts on the Ethereum blockchain. The platform represents real estate as NFTs and employs an escrow mechanism to ensure secure transactions among buyers, sellers, lenders, and inspectors.
 
-Currently, two official plugins are available:
+## Features
+- **Real Estate NFTs**: Properties are tokenized as NFTs for verifiable ownership.
+- **Escrow Contract**: Ensures fair transactions by holding funds until conditions are met.
+- **Role-Based Access**:
+  - **Buyer**: Can deposit funds and finalize property purchase.
+  - **Seller**: Lists properties and approves transactions.
+  - **Lender**: Provides loans and verifies payments.
+  - **Inspector**: Confirms property conditions before transactions proceed.
+- **IPFS Integration**: Stores property metadata on IPFS via Pinata.
+- **JSON Server**: Stores property details after being added.
+- **Listing & Approval Process**:
+  - Once a new property is added, only the seller can list it.
+  - Property details are stored on the JSON server.
+  - After listing and approval, the property is minted as an NFT.
+- **Dynamic UI**: Role-based button texts and interactions based on the logged-in account.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## Tech Stack
+- **Frontend**: React (Vite) + Tailwind CSS
+- **Smart Contracts**: Solidity (Hardhat, OpenZeppelin)
+- **Blockchain**: Ethereum Sepolia Testnet
+- **Storage**: IPFS (Pinata), JSON Server
+- **Backend**: JSON Server (for storing IPFS hash, uploader address, and listing status)
+- **Libraries**: Ethers.js
 
-## Expanding the ESLint configuration
+## Deployment
+- **Smart Contract**: Deployed on Sepolia Testnet
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+## Installation
+### Prerequisites
+- Node.js & npm/yarn
+- Ethers.js
+- Metamask wallet configured for Sepolia
 
-- Configure the top-level `parserOptions` property like this:
+### Steps
+1. Clone the repository:
+   ```sh
+   git clone https://github.com/your-repo/real-estate-dapp.git
+   cd real-estate-dapp
+   ```
+2. Install dependencies:
+   ```sh
+   npm install
+   ```
+3. Set up environment variables:
+   - Create a `.env` file in the root directory.
+   - Add your Pinata API credentials.
+4. Start the json server:
+   ```sh
+   npx json-server db.json
+   ```
+5. Start the frontend:
+   ```sh
+   npm run dev
+   ```
 
-```js
-export default tseslint.config({
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
-```
 
-- Replace `tseslint.configs.recommended` to `tseslint.configs.recommendedTypeChecked` or `tseslint.configs.strictTypeChecked`
-- Optionally add `...tseslint.configs.stylisticTypeChecked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and update the config:
+## Usage
+1. Connect Metamask to the Sepolia Testnet.
+2. Log in as a seller to upload property metadata to IPFS.
+3. Add Property details to the form.
+4. The seller lists the property, and after approval, the property is minted as an NFT.
+5. Buyers browse and purchase available properties via escrow.
+6. Lenders and inspectors verify transactions.
+7. The seller does the final approval and the property is sold
 
-```js
-// eslint.config.js
-import react from 'eslint-plugin-react'
+## Smart Contract Addresses
+- **Real Estate Contract**: `0x22Bb2A4b68FEfCdF0A5A555514A70a0d996cC83a`
+- **Escrow Contract**: `0x8D2424CDE9f39C70EFF88e20D085e1E366DcFDa1`
 
-export default tseslint.config({
-  // Set the react version
-  settings: { react: { version: '18.3' } },
-  plugins: {
-    // Add the react plugin
-    react,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended rules
-    ...react.configs.recommended.rules,
-    ...react.configs['jsx-runtime'].rules,
-  },
-})
-```
+## Future Improvements
+- Multi-chain support (Polygon, Base)
+- On-chain loan approval process
+
+## License
+MIT License
+
