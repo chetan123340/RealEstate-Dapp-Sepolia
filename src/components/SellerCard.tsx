@@ -4,7 +4,6 @@ import { useEffect, useState } from 'react'
 interface SellerCardProps {
     IpfsHash: string;
     isListed: boolean;
-    owner: string;
     handleListing: any;
     idListing: string;
 }
@@ -23,7 +22,7 @@ interface Property {
     attributes: Attribute[];
 }
 
-export default function SellerCard({ IpfsHash, isListed, owner, handleListing, idListing }: SellerCardProps) {
+export default function SellerCard({ IpfsHash, isListed, handleListing, idListing }: SellerCardProps) {
     const [details, setDetails] = useState<Property | null>(null)
 
     useEffect(() => {
@@ -54,7 +53,6 @@ export default function SellerCard({ IpfsHash, isListed, owner, handleListing, i
                             <p>{details.attributes[4].trait_type} : {details.attributes[4].value}</p>
                             <p>{details.attributes[5].trait_type} : {details.attributes[5].value}</p>
                             <p className=' text-2xl font-semibold'>{details.attributes[0].value} ETH</p>
-                            <p className=' text-2xl'>Owner: {owner}</p>
                         </div>
                         <div>
                             <img src={details.image} alt="Home image" className='h-[250px] w-[250px] rounded-md' />

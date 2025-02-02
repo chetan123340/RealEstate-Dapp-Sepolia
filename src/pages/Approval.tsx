@@ -16,7 +16,10 @@ export default function Approval({
   escrowContract,
   escrowAddress,
   provider }: ApprovalProps) {
-  if (account === "0xEe9a477BDb9791FFd0D135d3e6E31d968f90dC4F") {
+  if (account === "0xEe9a477BDb9791FFd0D135d3e6E31d968f90dC4F" ||
+    account === "0x5cAa009dDb1f1ad8200C1E18F609b142f46a7Dd7" ||
+    account === "0x43CAdE407dAa07F1b7eb388C7DD613f3C52E7Cee"
+   ) {
     const [steps, setSteps] = useState<string[]>([]);
     const [isOpen, setIsOpen] = useState(false);
     const [data, setData] = useState<any[]>([])
@@ -90,7 +93,6 @@ export default function Approval({
 
           await axios.put("http://localhost:3000/data/" + idListing, {
             IpfsHash: data.IpfsHash,
-            owner: data.owner,
             isListed: true,
             id: data.id
           })
@@ -116,7 +118,6 @@ export default function Approval({
               <SellerCard
                 IpfsHash={d.IpfsHash}
                 idListing={d.id}
-                owner={d.owner}
                 isListed={d.isListed}
                 handleListing={handleListing} />
             </div>

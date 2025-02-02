@@ -64,7 +64,6 @@ export default function AddProperty({ totalSupply }: { totalSupply: number }) {
             setHomeDetails(initialState)
             const dbData = {
                 IpfsHash: upload.IpfsHash,
-                owner: homeDetails.owner,
                 isListed: false
             }
             try {
@@ -84,18 +83,10 @@ export default function AddProperty({ totalSupply }: { totalSupply: number }) {
         <div className="flex justify-center items-center ">
             <div className="m-24 p-4 rounded-2xl shadow-2xl w-[900px]">
                 <div className="flex flex-col">
-                    <div className=" flex justify-between">
-                        <div className="w-[50%] mr-2">
-                            <InputLabel label="Name" placeholder="Enter your name" type="text" homeDetails={homeDetails} setHomeDetails={setHomeDetails} name="name" />
-                        </div>
-                        <div className="w-[50%] ml-2">
-                            <InputLabel label="Owner" placeholder="Enter the owner hash address" type="text" homeDetails={homeDetails} setHomeDetails={setHomeDetails} name="owner" />
-
-                        </div>
-                    </div>
+                    <InputLabel label="Name" placeholder="Enter your name" type="text" homeDetails={homeDetails} setHomeDetails={setHomeDetails} name="name" />
                     <InputLabel label="Address" placeholder="Enter the address" type="text" homeDetails={homeDetails} setHomeDetails={setHomeDetails} name="address" />
                     <InputLabel label="Description" placeholder="Enter the description" type="text" homeDetails={homeDetails} setHomeDetails={setHomeDetails} name="description" />
-                    <InputLabel label="Image" placeholder="Add the link to the Image of your property" type="text" homeDetails={homeDetails} setHomeDetails={setHomeDetails} name="image"/>
+                    <InputLabel label="Image" placeholder="Add the link to the Image of your property" type="text" homeDetails={homeDetails} setHomeDetails={setHomeDetails} name="image" />
                     <div className="flex justify-stretch">
                         <div className="w-[50%] mr-2">
                             <InputLabel label="Purchase Price" placeholder="Enter the purchase price" type="number" homeDetails={homeDetails} setHomeDetails={setHomeDetails} name="price" />

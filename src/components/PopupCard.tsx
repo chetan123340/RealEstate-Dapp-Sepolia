@@ -13,7 +13,7 @@ export default function PopupCard({ account, provider, escrow, toggleHome, setIs
         lender: "",
         inspector: "",
         seller: "",
-        hasBought: false,
+        hasBought: false, 
         hasLended: false,
         hasInspected: false,
         hasSold: false,

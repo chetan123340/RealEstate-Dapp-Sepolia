@@ -6,7 +6,10 @@ interface NavBarProps {
   provider: any;
 }
 
-const SELLER_ADDRESS = "0xEe9a477BDb9791FFd0D135d3e6E31d968f90dC4F"
+const SELLER_ADDRESS = "0xEe9a477BDb9791FFd0D135d3e6E31d968f90dC4F" 
+const INSPECTOR_ADDRESS = "0x5cAa009dDb1f1ad8200C1E18F609b142f46a7Dd7" 
+const LENDER_ADDRESS = "0x43CAdE407dAa07F1b7eb388C7DD613f3C52E7Cee"
+   
 
 export default function NavBar({ provider, account, setAccount }: NavBarProps) {
   const navigate = useNavigate()
@@ -42,7 +45,7 @@ export default function NavBar({ provider, account, setAccount }: NavBarProps) {
       <div className="flex justify-between">
         <div className='font-bold text-xl mt-2' onClick={handleHome}>Real Estate Dapp</div>
         <div className="flex justify-end">
-          {account == SELLER_ADDRESS ? <div className='ml-3'><button className='bg-secondary p-2 font-bold text-background rounded-full' onClick={handleApproval}>Seller Btn</button></div> : null}
+          {account === SELLER_ADDRESS || account === INSPECTOR_ADDRESS || account === LENDER_ADDRESS ? <div className='ml-3'><button className='bg-secondary p-2 font-bold text-background rounded-full' onClick={handleApproval}>Approval</button></div> : null}
           <div className='ml-3'><button className='bg-secondary p-2 font-bold text-background rounded-full' onClick={handleAddProperty}>Add Property</button></div>
           <div className='ml-3'><button onClick={connectWallet} className='bg-secondary p-2 font-semibold text-background rounded-full'>{account ? `Connected: ${account.slice(0, 6)}...${account.slice(-4)}` : "Connect Wallet"}</button></div>
         </div>
