@@ -3,6 +3,8 @@ import { useEffect, useRef, useState } from 'react'
 import SellerCard from '../components/SellerCard'
 import { ethers } from 'ethers';
 
+const SELLER_ADDRESS = "0xEe9a477BDb9791FFd0D135d3e6E31d968f90dC4F" 
+
 interface ApprovalProps {
   account: string;
   realEstateContract: any;
@@ -15,11 +17,8 @@ export default function Approval({
   realEstateContract,
   escrowContract,
   escrowAddress,
-  provider }: ApprovalProps) {
-  if (account === "0xEe9a477BDb9791FFd0D135d3e6E31d968f90dC4F" ||
-    account === "0x5cAa009dDb1f1ad8200C1E18F609b142f46a7Dd7" ||
-    account === "0x43CAdE407dAa07F1b7eb388C7DD613f3C52E7Cee"
-   ) {
+  provider}: ApprovalProps) {
+  if (account === SELLER_ADDRESS) {
     const [steps, setSteps] = useState<string[]>([]);
     const [isOpen, setIsOpen] = useState(false);
     const [data, setData] = useState<any[]>([])
@@ -44,13 +43,15 @@ export default function Approval({
       fetchData()
     }, [data])
 
-    const handleListing = async (IpfsHash: string, idListing: string, tokenId: number) => {
-      setIsOpen(true); // Open modal
+    const handleListing = async (IpfsHash: string, idListing: string, tokenId: number, value: number) => {
+      setIsOpen(true); 
       try {
         const approveAndList = async () => {
+          const valEther = (String(value))
+          
           setSteps(["⏳ Initializing transaction..."]);
 
-          const purchasePrice = ethers.parseEther("0.01");
+          const purchasePrice = ethers.parseEther(valEther);
           const escrowAmount = ethers.parseEther("0.01");
 
           // Mint Property

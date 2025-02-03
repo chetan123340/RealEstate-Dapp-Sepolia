@@ -1,10 +1,10 @@
 [
     {
-        "name": "Heritage Mansion",
-        "address": "Fort Kochi, Kerala 682001",
-        "description": "A beautifully restored heritage mansion with antique interiors.",
+        "name": "Royal Estate",
+        "address": "Knightsbridge, London, UK SW1X 7XL",
+        "description": "A grand estate located in the prestigious Knightsbridge area.",
         "image": "",
-        "id": "9",
+        "id": "11",
         "attributes": [
             {
                 "trait_type": "Purchase Price",
@@ -12,11 +12,11 @@
             },
             {
                 "trait_type": "Type of Residence",
-                "value": "Mansion"
+                "value": "Estate"
             },
             {
                 "trait_type": "Bed Rooms",
-                "value": 6
+                "value": 7
             },
             {
                 "trait_type": "Bathrooms",
@@ -24,20 +24,152 @@
             },
             {
                 "trait_type": "Square Feet",
-                "value": 6000
+                "value": 8000
             },
             {
                 "trait_type": "Year Built",
-                "value": 1920
+                "value": 1890
             }
         ]
     },
     {
-        "name": "Hilltop Cottage",
-        "address": "Ooty, Tamil Nadu 643001",
-        "description": "A peaceful hilltop cottage surrounded by tea plantations.",
+        "name": "Maple Retreat",
+        "address": "Banff, Alberta, Canada T1L 1A1",
+        "description": "A cozy retreat surrounded by the stunning Rocky Mountains.",
         "image": "",
-        "id": "10",
+        "id": "12",
+        "attributes": [
+            {
+                "trait_type": "Purchase Price",
+                "value": 0.02
+            },
+            {
+                "trait_type": "Type of Residence",
+                "value": "Cabin"
+            },
+            {
+                "trait_type": "Bed Rooms",
+                "value": 4
+            },
+            {
+                "trait_type": "Bathrooms",
+                "value": 3
+            },
+            {
+                "trait_type": "Square Feet",
+                "value": 3500
+            },
+            {
+                "trait_type": "Year Built",
+                "value": 1985
+            }
+        ]
+    },
+    {
+        "name": "Alpine Lodge",
+        "address": "Zermatt, Switzerland 3920",
+        "description": "A charming lodge with breathtaking views of the Matterhorn.",
+        "image": "",
+        "id": "13",
+        "attributes": [
+            {
+                "trait_type": "Purchase Price",
+                "value": 0.02
+            },
+            {
+                "trait_type": "Type of Residence",
+                "value": "Lodge"
+            },
+            {
+                "trait_type": "Bed Rooms",
+                "value": 6
+            },
+            {
+                "trait_type": "Bathrooms",
+                "value": 5
+            },
+            {
+                "trait_type": "Square Feet",
+                "value": 5500
+            },
+            {
+                "trait_type": "Year Built",
+                "value": 1970
+            }
+        ]
+    },
+    {
+        "name": "Sunset Haven",
+        "address": "Maui, Hawaii, USA 96761",
+        "description": "A beautiful beachfront haven with spectacular sunset views.",
+        "image": "",
+        "id": "14",
+        "attributes": [
+            {
+                "trait_type": "Purchase Price",
+                "value": 0.02
+            },
+            {
+                "trait_type": "Type of Residence",
+                "value": "Beach House"
+            },
+            {
+                "trait_type": "Bed Rooms",
+                "value": 5
+            },
+            {
+                "trait_type": "Bathrooms",
+                "value": 4
+            },
+            {
+                "trait_type": "Square Feet",
+                "value": 4200
+            },
+            {
+                "trait_type": "Year Built",
+                "value": 2005
+            }
+        ]
+    },
+    {
+        "name": "Emerald Manor",
+        "address": "Dublin, Ireland D02 XY45",
+        "description": "A historic manor with lush green surroundings and antique interiors.",
+        "image": "",
+        "id": "15",
+        "attributes": [
+            {
+                "trait_type": "Purchase Price",
+                "value": 0.02
+            },
+            {
+                "trait_type": "Type of Residence",
+                "value": "Manor"
+            },
+            {
+                "trait_type": "Bed Rooms",
+                "value": 8
+            },
+            {
+                "trait_type": "Bathrooms",
+                "value": 7
+            },
+            {
+                "trait_type": "Square Feet",
+                "value": 9000
+            },
+            {
+                "trait_type": "Year Built",
+                "value": 1850
+            }
+        ]
+    },
+    {
+        "name": "Amber Cottage",
+        "address": "Tuscany, Italy 53026",
+        "description": "A charming stone cottage nestled in the Tuscan countryside.",
+        "image": "",
+        "id": "16",
         "attributes": [
             {
                 "trait_type": "Purchase Price",
@@ -57,11 +189,110 @@
             },
             {
                 "trait_type": "Square Feet",
-                "value": 1500
+                "value": 2800
             },
             {
                 "trait_type": "Year Built",
-                "value": 2013
+                "value": 1925
+            }
+        ]
+    },
+    {
+        "name": "Zen Pavilion",
+        "address": "Kyoto, Japan 600-8216",
+        "description": "A traditional Japanese pavilion with serene gardens and wooden interiors.",
+        "image": "",
+        "id": "17",
+        "attributes": [
+            {
+                "trait_type": "Purchase Price",
+                "value": 0.02
+            },
+            {
+                "trait_type": "Type of Residence",
+                "value": "Pavilion"
+            },
+            {
+                "trait_type": "Bed Rooms",
+                "value": 4
+            },
+            {
+                "trait_type": "Bathrooms",
+                "value": 3
+            },
+            {
+                "trait_type": "Square Feet",
+                "value": 3200
+            },
+            {
+                "trait_type": "Year Built",
+                "value": 1895
+            }
+        ]
+    },
+    {
+        "name": "Crystal Chalet",
+        "address": "Aspen, Colorado, USA 81611",
+        "description": "A luxury chalet with panoramic mountain views and ski-in access.",
+        "image": "",
+        "id": "18",
+        "attributes": [
+            {
+                "trait_type": "Purchase Price",
+                "value": 0.02
+            },
+            {
+                "trait_type": "Type of Residence",
+                "value": "Chalet"
+            },
+            {
+                "trait_type": "Bed Rooms",
+                "value": 6
+            },
+            {
+                "trait_type": "Bathrooms",
+                "value": 5
+            },
+            {
+                "trait_type": "Square Feet",
+                "value": 7000
+            },
+            {
+                "trait_type": "Year Built",
+                "value": 2000
+            }
+        ]
+    },
+    {
+        "name": "Ivory Penthouse",
+        "address": "Downtown Dubai, UAE 00000",
+        "description": "A sleek and modern penthouse with stunning views of Burj Khalifa.",
+        "image": "",
+        "id": "19",
+        "attributes": [
+            {
+                "trait_type": "Purchase Price",
+                "value": 0.02
+            },
+            {
+                "trait_type": "Type of Residence",
+                "value": "Penthouse"
+            },
+            {
+                "trait_type": "Bed Rooms",
+                "value": 4
+            },
+            {
+                "trait_type": "Bathrooms",
+                "value": 4
+            },
+            {
+                "trait_type": "Square Feet",
+                "value": 5000
+            },
+            {
+                "trait_type": "Year Built",
+                "value": 2018
             }
         ]
     }

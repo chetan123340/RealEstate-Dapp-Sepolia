@@ -55,7 +55,7 @@ export default function PopupCard({ account, provider, escrow, toggleHome, setIs
     }, [account, hasSold]);
 
     const buyHandler = async () => {
-        const escrowAmount = await escrow.escrowAmount(toggleHome.id);
+        const escrowAmount = await escrow.purchasePrice(toggleHome.id);
         const signer = await provider.getSigner();
 
         let transaction = await escrow.connect(signer).depositEarnest(toggleHome.id, { value: escrowAmount });

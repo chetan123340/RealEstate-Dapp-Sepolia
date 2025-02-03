@@ -3,7 +3,16 @@ import InputLabel from "../components/InputLabel"
 import { PinataSDK } from "pinata-web3";
 import axios from "axios";
 
-export default function AddProperty({ totalSupply }: { totalSupply: number }) {
+const SELLER_ADDRESS = "0xEe9a477BDb9791FFd0D135d3e6E31d968f90dC4F"
+const INSPECTOR_ADDRESS = "0x5cAa009dDb1f1ad8200C1E18F609b142f46a7Dd7"
+const LENDER_ADDRESS = "0x43CAdE407dAa07F1b7eb388C7DD613f3C52E7Cee"
+
+interface AddPropertyProps {
+    totalSupply: number;
+    account: string;
+}
+
+export default function AddProperty({ totalSupply, account }: AddPropertyProps) {
     const pinata = new PinataSDK({
         pinataJwt: import.meta.env.VITE_JWT,
         pinataGateway: import.meta.env.VITE_pinataGateway,
@@ -81,29 +90,38 @@ export default function AddProperty({ totalSupply }: { totalSupply: number }) {
 
     return (
         <div className="flex justify-center items-center ">
-            <div className="m-24 p-4 rounded-2xl shadow-2xl w-[900px]">
-                <div className="flex flex-col">
-                    <InputLabel label="Name" placeholder="Enter your name" type="text" homeDetails={homeDetails} setHomeDetails={setHomeDetails} name="name" />
-                    <InputLabel label="Address" placeholder="Enter the address" type="text" homeDetails={homeDetails} setHomeDetails={setHomeDetails} name="address" />
-                    <InputLabel label="Description" placeholder="Enter the description" type="text" homeDetails={homeDetails} setHomeDetails={setHomeDetails} name="description" />
-                    <InputLabel label="Image" placeholder="Add the link to the Image of your property" type="text" homeDetails={homeDetails} setHomeDetails={setHomeDetails} name="image" />
-                    <div className="flex justify-stretch">
-                        <div className="w-[50%] mr-2">
-                            <InputLabel label="Purchase Price" placeholder="Enter the purchase price" type="number" homeDetails={homeDetails} setHomeDetails={setHomeDetails} name="price" />
-                            <InputLabel label="Type of Residence" placeholder="Enter the type of residence" type="text" homeDetails={homeDetails} setHomeDetails={setHomeDetails} name="type" />
-                            <InputLabel label="Bed Rooms" placeholder="Enter the number of Bed Rooms" type="number" homeDetails={homeDetails} setHomeDetails={setHomeDetails} name="bedrooms" />
-                        </div>
-                        <div className="w-[50%] ml-2">
-                            <InputLabel label="Bathrooms" placeholder="Enter the number of Bathrooms" type="number" homeDetails={homeDetails} setHomeDetails={setHomeDetails} name="bathrooms" />
-                            <InputLabel label="Square Feet" placeholder="Enter the Square Feet" type="number" homeDetails={homeDetails} setHomeDetails={setHomeDetails} name="sqft" />
-                            <InputLabel label="Year Built" placeholder="Enter the Year Built" type="number" homeDetails={homeDetails} setHomeDetails={setHomeDetails} name="year" />
+            {account == LENDER_ADDRESS || account == SELLER_ADDRESS || account == INSPECTOR_ADDRESS ? (
+                <div className="m-24 p-4 rounded-2xl shadow-2xl w-[900px]">
+                    <div className="flex flex-col">
+                        <InputLabel label="Name" placeholder="Enter property name" type="text" homeDetails={homeDetails} setHomeDetails={setHomeDetails} name="name" />
+                        <InputLabel label="Address" placeholder="Enter property address" type="text" homeDetails={homeDetails} setHomeDetails={setHomeDetails} name="address" />
+                        <InputLabel label="Description" placeholder="Enter property description" type="text" homeDetails={homeDetails} setHomeDetails={setHomeDetails} name="description" />
+                        <InputLabel label="Image" placeholder="Add the link to the Image of your property" type="text" homeDetails={homeDetails} setHomeDetails={setHomeDetails} name="image" />
+                        <div className="flex justify-stretch">
+                            <div className="w-[50%] mr-2">
+                                <InputLabel label="Purchase Price" placeholder="Enter the purchase price" type="number" homeDetails={homeDetails} setHomeDetails={setHomeDetails} name="price" />
+                                <InputLabel label="Type of Residence" placeholder="Enter the type of residence" type="text" homeDetails={homeDetails} setHomeDetails={setHomeDetails} name="type" />
+                                <InputLabel label="Bed Rooms" placeholder="Enter the number of Bed Rooms" type="number" homeDetails={homeDetails} setHomeDetails={setHomeDetails} name="bedrooms" />
+                            </div>
+                            <div className="w-[50%] ml-2">
+                                <InputLabel label="Bathrooms" placeholder="Enter the number of Bathrooms" type="number" homeDetails={homeDetails} setHomeDetails={setHomeDetails} name="bathrooms" />
+                                <InputLabel label="Square Feet" placeholder="Enter the Square Feet" type="number" homeDetails={homeDetails} setHomeDetails={setHomeDetails} name="sqft" />
+                                <InputLabel label="Year Built" placeholder="Enter the Year Built" type="number" homeDetails={homeDetails} setHomeDetails={setHomeDetails} name="year" />
+                            </div>
                         </div>
                     </div>
+                    <div className="group flex justify-end">
+                        <button className="group-hover:cursor-pointer p-3 bg-accent border rounded-2xl font-bold text-primary w-[25%]" onClick={handleSubmit}>Submit</button>
+                    </div>
                 </div>
-                <div className="group flex justify-end">
-                    <button className="group-hover:cursor-pointer p-3 bg-accent border rounded-2xl font-bold text-primary w-[25%]" onClick={handleSubmit}>Submit</button>
+            ) : (
+                <div className=' bg-background text-7xl font-bold'>
+                    <div className=' flex items-center justify-center h-screen'>
+                        Not Authorized
+                    </div>
                 </div>
-            </div>
+            )}
+
         </div>
     )
 }

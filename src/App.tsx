@@ -82,7 +82,7 @@ function App() {
       <NavBar account={account} provider={provider} setAccount={setAccount}/>
       <Routes>
         <Route path='/' element={<Home />} />
-        <Route path='/add-property' element={<AddProperty totalSupply={totalSupply}/>} />
+        <Route path='/add-property' element={<AddProperty totalSupply={totalSupply} account={account}/>} />
         <Route path='/approval' element={
           <Approval 
           account={account} 

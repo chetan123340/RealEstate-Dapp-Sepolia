@@ -60,7 +60,7 @@ export default function SellerCard({ IpfsHash, isListed, handleListing, idListin
                     </div>
                     {isListed ?
                         <div className=' text-2xl border p-2 rounded-full text-center font-bold bg-green-400 text-white'>Approved</div> :
-                        <div className='group-hover:cursor-pointer text-2xl border p-2 rounded-full text-center font-bold' onClick={() => handleListing(IpfsHash, idListing, details.id)}>Approve and list</div>
+                        <div className='group-hover:cursor-pointer text-2xl border p-2 rounded-full text-center font-bold' onClick={() => handleListing(IpfsHash, idListing, details.id, details.attributes[0].value)}>Approve and list</div>
                     }
 
                 </div>
