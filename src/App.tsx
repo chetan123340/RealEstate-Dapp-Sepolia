@@ -8,6 +8,7 @@ import NavBar from './components/NavBar';
 import AddProperty from './pages/AddProperty';
 import Approval from './pages/Approval';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import axios from 'axios';
 
 function App() {
   const [provider, setProvider] = useState<any>(null)
@@ -45,8 +46,8 @@ function App() {
           const tokenURI = await realEstateContract.tokenURI(index);
 
           // Fetch metadata from the Token URI
-          const response = await fetch(tokenURI);
-          const metadata = await response.json();
+          const response = await axios.get(tokenURI);
+          const metadata = response.data;
 
           if (metadata) {
             fetchedHomes.push(metadata)
@@ -81,7 +82,7 @@ function App() {
       <NavBar account={account} provider={provider} setAccount={setAccount}/>
       <Routes>
         <Route path='/' element={<Home />} />
-        <Route path='/add-property' element={<AddProperty totalSupply={totalSupply}/>} />
+        <Route path='/add-property' element={<AddProperty totalSupply={totalSupply} account={account}/>} />
         <Route path='/approval' element={
           <Approval 
           account={account} 
