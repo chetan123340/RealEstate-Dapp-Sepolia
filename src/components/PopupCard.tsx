@@ -107,6 +107,7 @@ export default function PopupCard({ account, provider, escrow, toggleHome, setIs
                 <div className='flex justify-end m-[-15px] text-xl cursor-pointer' onClick={() => setIsOpen(false)}>X</div>
                 <h2 className="text-5xl font-bold mb-4">{toggleHome.name}</h2>
                 <p className='text-3xl'>{toggleHome.description}</p>
+                <p className='text-3xl'> ID : {toggleHome.id}</p>
                 <p className='text-3xl mb-3'> At: {toggleHome.address}</p>
                 <div className="flex justify-stretch">
 

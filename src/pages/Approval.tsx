@@ -3,22 +3,22 @@ import { useEffect, useRef, useState } from 'react'
 import SellerCard from '../components/SellerCard'
 import { ethers } from 'ethers';
 
-const SELLER_ADDRESS = "0xEe9a477BDb9791FFd0D135d3e6E31d968f90dC4F" 
-
 interface ApprovalProps {
   account: string;
   realEstateContract: any;
   escrowContract: any;
   escrowAddress: string;
   provider: any;
+  seller: any;
 }
 export default function Approval({
   account,
   realEstateContract,
   escrowContract,
   escrowAddress,
-  provider}: ApprovalProps) {
-  if (account === SELLER_ADDRESS) {
+  provider,
+  seller }: ApprovalProps) {
+  if (account === seller) {
     const [steps, setSteps] = useState<string[]>([]);
     const [isOpen, setIsOpen] = useState(false);
     const [data, setData] = useState<any[]>([])

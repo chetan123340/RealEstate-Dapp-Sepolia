@@ -3,16 +3,15 @@ import InputLabel from "../components/InputLabel"
 import { PinataSDK } from "pinata-web3";
 import axios from "axios";
 
-const SELLER_ADDRESS = "0xEe9a477BDb9791FFd0D135d3e6E31d968f90dC4F"
-const INSPECTOR_ADDRESS = "0x5cAa009dDb1f1ad8200C1E18F609b142f46a7Dd7"
-const LENDER_ADDRESS = "0x43CAdE407dAa07F1b7eb388C7DD613f3C52E7Cee"
-
 interface AddPropertyProps {
     totalSupply: number;
     account: string;
+    seller: any;
+    lender: any;
+    inspector: any;
 }
 
-export default function AddProperty({ totalSupply, account }: AddPropertyProps) {
+export default function AddProperty({ totalSupply, account, seller, lender, inspector }: AddPropertyProps) {
     const pinata = new PinataSDK({
         pinataJwt: import.meta.env.VITE_JWT,
         pinataGateway: import.meta.env.VITE_pinataGateway,
@@ -90,7 +89,7 @@ export default function AddProperty({ totalSupply, account }: AddPropertyProps) 
 
     return (
         <div className="flex justify-center items-center ">
-            {account == LENDER_ADDRESS || account == SELLER_ADDRESS || account == INSPECTOR_ADDRESS ? (
+            {account == lender || account == seller || account == inspector ? (
                 <div className="m-24 p-4 rounded-2xl shadow-2xl w-[900px]">
                     <div className="flex flex-col">
                         <InputLabel label="Name" placeholder="Enter property name" type="text" homeDetails={homeDetails} setHomeDetails={setHomeDetails} name="name" />
