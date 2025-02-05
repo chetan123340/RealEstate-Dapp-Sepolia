@@ -9,11 +9,6 @@ interface NavBarProps {
   inspector: any;
 }
 
-const SELLER_ADDRESS = "0xEe9a477BDb9791FFd0D135d3e6E31d968f90dC4F" 
-const INSPECTOR_ADDRESS = "0x5cAa009dDb1f1ad8200C1E18F609b142f46a7Dd7" 
-const LENDER_ADDRESS = "0x43CAdE407dAa07F1b7eb388C7DD613f3C52E7Cee"
-   
-
 export default function NavBar({ provider, account, setAccount, seller, inspector, lender }: NavBarProps) {
   const navigate = useNavigate()
 

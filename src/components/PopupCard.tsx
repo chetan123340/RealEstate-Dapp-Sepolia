@@ -21,7 +21,7 @@ export default function PopupCard({ account, provider, escrow, toggleHome, setIs
 
     const [owner, setOwner] = useState<string>("");
     const [loading, setLoading] = useState<boolean>(false);
-    const { inspector, lender, buyer, seller, hasBought, hasInspected, hasLended, hasSold } = details
+    const { inspector, lender, seller, hasBought, hasInspected, hasLended, hasSold } = details
 
     const fetchDetails = async () => {
         setLoading(true)
