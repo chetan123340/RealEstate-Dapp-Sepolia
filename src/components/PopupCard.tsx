@@ -13,7 +13,7 @@ export default function PopupCard({ account, provider, escrow, toggleHome, setIs
         lender: "",
         inspector: "",
         seller: "",
-        hasBought: false, 
+        hasBought: false,
         hasLended: false,
         hasInspected: false,
         hasSold: false,
@@ -21,7 +21,7 @@ export default function PopupCard({ account, provider, escrow, toggleHome, setIs
 
     const [owner, setOwner] = useState<string>("");
     const [loading, setLoading] = useState<boolean>(false);
-    const { inspector, lender, buyer, seller, hasBought, hasInspected, hasLended, hasSold } = details
+    const { inspector, lender, seller, hasBought, hasInspected, hasLended, hasSold } = details
 
     const fetchDetails = async () => {
         setLoading(true)
@@ -107,16 +107,20 @@ export default function PopupCard({ account, provider, escrow, toggleHome, setIs
                 <div className='flex justify-end m-[-15px] text-xl cursor-pointer' onClick={() => setIsOpen(false)}>X</div>
                 <h2 className="text-5xl font-bold mb-4">{toggleHome.name}</h2>
                 <p className='text-3xl'>{toggleHome.description}</p>
+                <p className='text-3xl'> ID : {toggleHome.id}    |      {toggleHome.facing && `Facing Road by ${toggleHome.facing}`}</p>
                 <p className='text-3xl mb-3'> At: {toggleHome.address}</p>
+                
                 <div className="flex justify-stretch">
-
-                    <img src={toggleHome.image} alt="house image" className=' rounded-2xl w-[415px] h-[315px]' />
+                    <a href={toggleHome.location ? toggleHome.location : null} target="_blank">
+                        <img src={toggleHome.image} alt="house image" className=' rounded-2xl w-[415px] h-[315px]' />
+                    </a>
                     <div className=' text-3xl bg-background shadow ml-16 p-3 rounded-2xl'>
                         <p>{toggleHome.attributes[1].trait_type} : {toggleHome.attributes[1].value}</p>
                         <p>{toggleHome.attributes[2].trait_type} : {toggleHome.attributes[2].value}</p>
                         <p>{toggleHome.attributes[3].trait_type} : {toggleHome.attributes[3].value}</p>
                         <p>{toggleHome.attributes[4].trait_type} : {toggleHome.attributes[4].value}</p>
                         <p>{toggleHome.attributes[5].trait_type} : {toggleHome.attributes[5].value}</p>
+                        {toggleHome.north && <p>N:{toggleHome.north}, S:{toggleHome.south}, E:{toggleHome.east}, W:{toggleHome.west}</p>}
                     </div>
                 </div>
                 {owner ? (
@@ -153,7 +157,7 @@ export default function PopupCard({ account, provider, escrow, toggleHome, setIs
                                 ${hasSold ? 'bg-gray-400 cursor-not-allowed' : "bg-red-500 group-hover:cursor-pointer"}`}
                                     onClick={sellHandler}
                                     disabled={hasSold}>
-                                        {hasSold ? 'Selling Approved' : 'Approve & Sell'}
+                                    {hasSold ? 'Selling Approved' : 'Approve & Sell'}
                                 </button>
                             </div>
                         ) : (
@@ -162,7 +166,7 @@ export default function PopupCard({ account, provider, escrow, toggleHome, setIs
                                 ${hasBought ? 'bg-gray-400 cursor-not-allowed' : "bg-secondary  group-hover:cursor-pointer"} `}
                                     onClick={buyHandler}
                                     disabled={hasBought}>
-                                        {hasBought ? 'Buying Approved' : `Buy @ ${toggleHome.attributes[0].value} ETH`}
+                                    {hasBought ? 'Buying Approved' : `Buy @ ${toggleHome.attributes[0].value} ETH`}
                                 </button>
                             </div>
                         )}

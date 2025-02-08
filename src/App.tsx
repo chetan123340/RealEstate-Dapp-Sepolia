@@ -17,6 +17,9 @@ function App() {
   const [realEstateContract, setRealEstateContract] = useState<any>(null)
   const [homes, setHomes] = useState<any[]>([]); // Ensure `homes` can hold metadata objects
   const [totalSupply, setTotalSupply] = useState<number>(0)
+  const [seller, setSeller] = useState(null)
+  const [lender, setLender] = useState(null)
+  const [inspector, setInspector] = useState(null)
 
 
   const realEstateAddress = '0x22Bb2A4b68FEfCdF0A5A555514A70a0d996cC83a'
@@ -36,9 +39,13 @@ function App() {
       const escrowContract = new ethers.Contract(escrowAddress, escrowABI, signer)
       setEscrowContract(escrowContract)
 
+      setSeller(await escrowContract.seller())
+      setLender(await escrowContract.lender())
+      setInspector(await escrowContract.inspector())
+
       const s = await realEstateContract.totalSupply()
       setTotalSupply(Number(s))
-      
+
       const fetchedHomes: any[] = []; // Temporary array to collect metadata
       for (let index = 1; index <= Number(s); index++) {
         try {
@@ -75,23 +82,41 @@ function App() {
       {homes && <Listing homes={homes} account={account} provider={provider} escrow={escrowContract} />}
     </div>
   )
-  
+
   return (
     <BrowserRouter>
-    <div className='bg-background'>
-      <NavBar account={account} provider={provider} setAccount={setAccount}/>
-      <Routes>
-        <Route path='/' element={<Home />} />
-        <Route path='/add-property' element={<AddProperty totalSupply={totalSupply} account={account}/>} />
-        <Route path='/approval' element={
-          <Approval 
-          account={account} 
-          realEstateContract={realEstateContract} 
-          escrowContract={escrowContract} 
-          escrowAddress={escrowAddress} 
-          provider={provider}/>
+      <div className='bg-background'>
+        <NavBar
+          account={account}
+          provider={provider}
+          setAccount={setAccount}
+          seller={seller}
+          lender={lender}
+          inspector={inspector}
+        />
+        <Routes>
+          <Route path='/' element={<Home />} />
+          <Route path='/add-property' element={
+            <AddProperty
+              totalSupply={totalSupply}
+              account={account}
+              seller={seller}
+              lender={lender}
+              inspector={inspector}
+            />
+          }
+          />
+          <Route path='/approval' element={
+            <Approval
+              account={account}
+              realEstateContract={realEstateContract}
+              escrowContract={escrowContract}
+              escrowAddress={escrowAddress}
+              provider={provider}
+              seller={seller}
+            />
           } />
-      </Routes>
+        </Routes>
       </div>
     </BrowserRouter>
   )
