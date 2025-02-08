@@ -19,6 +19,12 @@ interface Property {
     description: string;
     image: string;
     id: string;
+    north: string;
+    south: string;
+    east: string;
+    west: string;
+    facing: string;
+    location: string;
     attributes: Attribute[];
 }
 
@@ -47,6 +53,9 @@ export default function SellerCard({ IpfsHash, isListed, handleListing, idListin
                         <div className='flex flex-col text-xl'>
                             <p className=' font-bold text-3xl pb-3'>{details.name}</p>
                             <p className=' font-semibold'>{details.address}</p>
+                            <p className=' font-semibold'>N:{details.north}, S:{details.south}, E:{details.east}, W:{details.west}</p>
+                            <p className=' font-semibold'>{details.facing}</p>
+                            <p className=' font-semibold'><a target='_blank' href={details.location || undefined}>View Location</a></p>
                             <p>{details.attributes[1].trait_type} : {details.attributes[1].value}</p>
                             <p>{details.attributes[2].trait_type} : {details.attributes[2].value}</p>
                             <p>{details.attributes[3].trait_type} : {details.attributes[3].value}</p>
