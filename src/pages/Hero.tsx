@@ -9,7 +9,7 @@ export default function Hero() {
   };
 
   return (
-  <section id='home'>
+    <section id='home'>
       <div className="flex items-center justify-center h-screen px-8">
         <div className="flex justify-between w-full max-w-7xl">
           {/* Text Section */}
@@ -18,9 +18,16 @@ export default function Hero() {
             <p className="text-xl text-gray-600 mb-6">
               Revolutionize real estate with blockchain! Secure, transparent transactions powered by NFTs and Ethereum, simplifying ownership and reducing fraud.
             </p>
-            <button onClick={handleScroll} className="px-6 py-3 text-white rounded-lg hover:bg-primary bg-secondary font-bold">
-              Explore Properties!
-            </button>
+            <div className="flex flex-col">
+              <div className="flex justify-between my-4">
+                <a className='bg-accent text-2xl p-2 rounded-md border' target='_blank' href="https://sepolia.etherscan.io/address/0x22Bb2A4b68FEfCdF0A5A555514A70a0d996cC83a">View RealEstate Contract</a>
+                <a className='bg-accent text-2xl p-2 rounded-md border' target='_blank' href="https://sepolia.etherscan.io/address/0x8D2424CDE9f39C70EFF88e20D085e1E366DcFDa1">View Escrow Contract</a>
+              </div>
+              <button onClick={handleScroll} className="px-6 py-3 text-white rounded-lg hover:bg-primary bg-secondary font-bold">
+                Explore Properties!
+              </button>
+            </div>
+
           </div>
 
           {/* Image Section */}
