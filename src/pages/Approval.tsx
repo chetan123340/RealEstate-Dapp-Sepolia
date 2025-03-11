@@ -59,13 +59,13 @@ export default function Approval({
           const tokenURI = `https://red-official-urial-988.mypinata.cloud/ipfs/${IpfsHash}`;
           const mintTx = await realEstateContract.mint(tokenURI);
           await mintTx.wait();
-          setSteps(prev => [...prev, `✅ Minted Property! TX: mintTx.hash 0x06c67a5e7e54fe7c6a94a0bd3b48a7de205fcc5ca2adf875b47d3a8caa36adff`]);
+          setSteps(prev => [...prev, `✅ Minted Property! TX: mintTx.hash ${mintTx.hash}`]);
 
           // Approve Escrow Contract
           setSteps(prev => [...prev, "🔄 Approving Escrow contract..."]);
           const approveTx = await realEstateContract.approve(escrowAddress, tokenId);
           await approveTx.wait();
-          setSteps(prev => [...prev, `✅ Approved Escrow! TX: approveTx.hash 0x06c67a5e7e54fe7c6a94a0bd3b48a7de205fcc5ca2adf875b47d3a8caa36adff`]);
+          setSteps(prev => [...prev, `✅ Approved Escrow! TX: approveTx.hash ${approveTx.hash}`]);
 
           // Initialize Escrow
           setSteps(prev => [...prev, "🔄 Initializing Escrow..."]);
@@ -75,14 +75,14 @@ export default function Approval({
           const lenderAddress = "0x43CAdE407dAa07F1b7eb388C7DD613f3C52E7Cee";
           const initTx = await escrowContract.setInitals(realEstateContract.target, address, inspectorAddress, lenderAddress);
           await initTx.wait();
-          setSteps(prev => [...prev, `✅ Escrow Initialized! TX: initTx.hash 0x06c67a5e7e54fe7c6a94a0bd3b48a7de205fcc5ca2adf875b47d3a8caa36adff`]);
+          setSteps(prev => [...prev, `✅ Escrow Initialized! TX: initTx.hash ${initTx.hash}`]);
 
           // List Property
           setSteps(prev => [...prev, "📢 Listing property..."]);
           const buyerAddress = "0xE6Cd832d8052f08e29c4FeAfd27fc084c0ae5279";
           const listTx = await escrowContract.list(tokenId, buyerAddress, purchasePrice, escrowAmount, { value: escrowAmount });
           await listTx.wait();
-          setSteps(prev => [...prev, `✅ Property Listed! TX: listTx.hash 0x06c67a5e7e54fe7c6a94a0bd3b48a7de205fcc5ca2adf875b47d3a8caa36adff`]);
+          setSteps(prev => [...prev, `✅ Property Listed! TX: listTx.hash ${listTx.hash}`]);
 
           setSteps(prev => [...prev, "🎉 Property Successfully Minted & Listed!"]);
           dbUpdate()
