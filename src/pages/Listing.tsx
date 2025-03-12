@@ -28,7 +28,7 @@ export default function Listing({ homes, account, provider, escrow }: ListingPro
                     soldProperties.push(home)
                 }
             }
-            const updatedSoldProperties = soldProperties.filter(property => (!property.name.startsWith("Cozy") && !property.name.startsWith("Hilltop") && !property.name.startsWith("Moonwin")));
+            const updatedSoldProperties = soldProperties.filter(property => (!property.name.startsWith("Cozy") && !property.name.startsWith("Hilltop") && !property.name.startsWith("Moonwin") && !property.name.startsWith("Alpine")));
             setSoldProperties(updatedSoldProperties)
             setUnsoldProperties(unsoldProperties)
         }
